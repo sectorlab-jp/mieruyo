@@ -2,7 +2,7 @@
 お話が終わったと思って、スクロールした？"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="1" data-text="またスクロールしたね。
 まだ見るの？"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="2" data-text="……まだ来るんだ。
 そんなに、続きが気になる？"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="3" data-text="でも、もう書いてないよ。"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="4" data-text="……あれ。
-何かを見ている人がいる。"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="5" data-text="明るい、四角いものを持ってる。
+何かを見ている人がいる。"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="5" data-text="明るい、四角いものが見える。
 その中に、小さなものがたくさん並んでいる。"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="6" data-text="ときどき、指が動く。
 そのたびに、四角い光の中の小さなものが上へ流れていく。"><div class="sticky"><div class="words"></div></div></section><section class="beat" data-i="7" data-text="ああ。
 文字か。
@@ -30,7 +30,7 @@
 document.getElementById('start').addEventListener('click',()=>document.querySelector('.synopsis').scrollIntoView());
 const beats=Array.from(document.querySelectorAll('.beat')).map(el=>({el,chars:Array.from(el.dataset.text),out:el.querySelector('.words'),last:-1}));
 const echo=document.getElementById('echo');
-function update(){const H=innerHeight;for(const b of beats){const r=b.el.getBoundingClientRect();const available=Math.max(1,r.height-H);const p=Math.max(0,Math.min(1,(-r.top+H*.04)/(available*.76)));const n=Math.floor(p*b.chars.length);if(n!==b.last){b.out.textContent=b.chars.slice(0,n).join('');b.last=n;}}const a=beats[11].el.getBoundingClientRect(),z=beats[12].el.getBoundingClientRect();echo.style.opacity=a.top<0&&z.bottom>H*.6?'1':'0';}
+function update(){const H=innerHeight;for(const b of beats){const r=b.el.getBoundingClientRect();const available=Math.max(1,r.height-H);const p=Math.max(0,Math.min(1,(-r.top+H*.04)/(available*.76)));const n=Math.floor(p*b.chars.length);if(n!==b.last){b.out.textContent=b.chars.slice(0,n).join('');b.last=n;}}const a=beats[11].el.getBoundingClientRect(),z=beats[12].el.getBoundingClientRect();echo.style.opacity=a.top<0&&z.top>H*.7?'1':'0';}
 let busy=false;addEventListener('scroll',()=>{if(!busy){busy=true;requestAnimationFrame(()=>{update();busy=false})}},{passive:true});addEventListener('resize',update);update();
 const slider=document.getElementById('slider');slider.addEventListener('input',()=>{const v=Number(slider.value);document.getElementById('bright').style.opacity=v/100;document.getElementById('percent').textContent=v+'%';});
 </script></body></html>
