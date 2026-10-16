@@ -9,7 +9,7 @@ const KAKUYOMU_URL="https://kakuyomu.jp/users/kinoshitaanoshita/news/29120516075
 const target=document.getElementById("window"),track=document.getElementById("track");
 const letters=scenes.map(s=>Array.from(s));
 const lengths=letters.map(a=>a.length);
-const pauses=[85,100,95,45,18,12,12,12,12,12,12,45,12,12,25,12,12,12,12,20,45,12,20,95,0];
+const pauses=[115,115,95,45,18,12,12,12,12,12,12,45,12,12,25,12,12,12,12,20,45,12,20,95,0];
 const units=lengths.map((n,i)=>n+pauses[i]);
 const totalUnits=units.reduce((a,b)=>a+b,0);
 const viewport=()=>window.innerHeight||document.documentElement.clientHeight;
@@ -21,7 +21,7 @@ function draw(){
  while(index<scenes.length-1&&remaining>=units[index]){remaining-=units[index];index++;}
  const visible=[];
  // A few preceding passages remain in the reading area and scroll away naturally.
- for(let i=Math.max(0,index-3);i<index;i++)visible.push({text:scenes[i],old:true});
+ if(index>3){for(let i=Math.max(4,index-2);i<index;i++)visible.push({text:scenes[i],old:true});}
  visible.push({text:letters[index].slice(0,Math.min(lengths[index],remaining)).join(""),old:false});
  target.replaceChildren(...visible.map(v=>{const el=document.createElement("div");el.className="line "+(v.old?"old":"now");el.textContent=v.text;return el;}));
 }
